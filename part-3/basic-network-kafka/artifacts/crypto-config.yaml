@@ -1,0 +1,18 @@
+OrdererOrgs:
+  - Name: OrdererOrg
+    Domain: orderer-org
+    Specs:
+      - Hostname: orderer0
+
+PeerOrgs:
+  - Name: ArtistOrg
+    Domain: artist-org
+    Specs:
+      - Hostname: artist-peer-florence
+      - Hostname: artist-peer-paris
+
+  - Name: BrokerOrg
+    Domain: broker-org
+    Specs:
+      - Hostname: broker-peer-florence
+      - Hostname: broker-peer-paris

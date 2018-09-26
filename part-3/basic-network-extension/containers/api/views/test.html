@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <h1>Manual Api route tests</h1>
+    <h2>1. Create an artist in florence</h2>
+    <form enctype="application/json" action="/api/organizations/artists/peers/florence" method="POST">
+      <input type="text" name="name" value="Joe Mcgee">
+      <input type="text" name="username" value="Joe-mcgee">
+      <input type="text" name="password" value="password">
+      <button type="submit" name="Register">Register</button>
+    </form>
+    <h2>1a. Register a work of Art</h2>
+      <form enctype="application/json" action="/api/organizations/artists/peers/florence/users/Joe-mcgee/art" method="POST">
+      <input type="text" name="name" value="silver-ship">
+      <input type="text" name="description" value="A 3 masted ship etched on scratch board">
+      <button type="submit" name="Register">Register</button>
+    </form>
+    <h2>2. Create a Broker in florence</h2>
+      <form enctype="application/json" action="/api/organizations/brokers/peers/florence" method="POST">
+      <input type="text" name="name" value="The Gala: Florence">
+      <input type="text" name="username" value="gala-florence">
+      <input type="text" name="password" value="password">
+      <button type="submit" name="Register">Register</button>
+    </form>
+    <h2>2a. An artist sends a request for broker to sell registered art</h2>
+      <form enctype="application/json" action="/api/organizations/artists/peers/florence/users/Joe-mcgee/art/silver-ship/broker" method="POST">
+      <input type="text" name="price" value="600">
+      <input type="text" name="broker" value="gala-florence">
+      <input type="text" name="margin" value="10">
+      <button type="submit" name="Request">Request</button>
+    </form>
+    <h2>2b. Brokerage views brokerage request</h2>
+    <p> /api/organizations/brokers/peers/florence/users/gala-florence/requests</p>
+    <h2>2c. Brokerage Approves the brokerage request</h2>
+    <form enctype="application/json" action="/api/organizations/brokers/peers/florence/users/gala-florence/requests/request-0/approve" method="POST">
+      <button type="submit" name="Approve">Approve</button>
+    </form>
+    <h2>3. Owner registers</h2>
+    <form enctype="application/json" action="/api/organizations/owners/peers/florence" method="POST">
+      <input type="text" name="name" value="Cornelius">
+      <input type="text" name="username" value="cornelius">
+      <input type="text" name="password" value="password">
+      <button type="submit" name="Register">Register</button>
+    </form>
+    <h2>3a. Owner queries broker inventory</h2>
+    <p> /api/organizations/brokers/peers/florence/users/gala-florence/inventory</p>
+    <h2>3b. Owner can buy a piece of inventory</h2>
+      <form enctype="application/json" action="/api/organizations/brokers/peers/florence/users/gala-florence/inventory/inventory-0/sell" method="POST">
+      <input type="text" name="owner" value="cornelius">
+      <button type="submit" name="Register">Purchase</button>
+    </form>
+  </body>
+</html>
