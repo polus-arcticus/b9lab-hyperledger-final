@@ -1,0 +1,44 @@
+OrdererOrgs:
+  - Name: OrdererOrg
+    Domain: caldera.com
+    Specs:
+      - Hostname: ordererflorence
+      - Hostname: ordererparis
+
+
+PeerOrgs:
+  - Name: ArtistOrg
+    Domain: artist.caldera.com
+    Specs:
+      - Hostname: florence
+      - Hostname: paris
+
+  - Name: BrokerOrg
+    Domain: broker.caldera.com
+    Specs:
+      - Hostname: florence
+      - Hostname: paris
+
+  - Name: InsuranceOrg
+    Domain: insurance.caldera.com
+    Specs:
+      - Hostname: florence
+      - Hostname: paris
+
+  - Name: OwnerOrg
+    Domain: owner.caldera.com
+    Specs:
+      - Hostname: florence
+      - Hostname: paris
+
+  - Name: ProvenanceOrg
+    Domain: provenance.caldera.com
+    Specs:
+      - Hostname: florence
+      - Hostname: paris
+
+  - Name: ResearchOrg
+    Domain: research.caldera.com
+    Specs:
+      - Hostname: florence
+      - Hostname: paris
