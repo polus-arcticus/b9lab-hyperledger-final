@@ -1,5 +1,0 @@
-Organizations:
-  - &OwnerOrg
-    Name: OwnerOrgMSP
-    ID: OwnerOrgMSP
-    MSPDir:  ../containers/cli/peers/peerOrganizations/owner-org/msp

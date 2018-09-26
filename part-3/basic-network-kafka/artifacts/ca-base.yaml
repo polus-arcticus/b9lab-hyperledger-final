@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  ca-base:
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server-config
-    command: fabric-ca-server start -b admin:adminpw

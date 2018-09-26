@@ -1,7 +1,0 @@
-PeerOrgs:
-  - Name: OwnerOrg
-    Domain: owner-org
-    Template:
-      Count: 1
-    Users:
-      Count: 1
