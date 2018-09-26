@@ -1,0 +1,118 @@
+Organizations:
+
+  - &OrdererOrg
+    Name: OrdererOrg
+    ID: OrdererMSP
+    MSPDir: crypto-config/ordererOrganizations/caldera.com/msp
+
+  - &ArtistOrg
+    Name: ArtistOrgMSP
+    ID: ArtistOrgMSP
+    MSPDir: crypto-config/peerOrganizations/artist.caldera.com/msp
+    AnchorPeers:
+      - Host: blockchain-artistflorence
+      - Port: 30110
+      - Host: blockchain-artistparis
+      - Port: 30210
+
+  - &BrokerOrg
+    Name: BrokerOrgMSP
+    ID: BrokerOrgMSP
+    MSPDir: crypto-config/peerOrganizations/broker.caldera.com/msp
+    AnchorPeers:
+      - Host: blockchain-brokerflorence
+      - Port: 30310
+      - Host: blockchain-brokerparis
+      - Port: 30410
+
+  - &InsuranceOrg
+    Name: InsuranceOrgMSP
+    ID: InsuranceOrgMSP
+    MSPDir: crypto-config/peerOrganizations/insurance.caldera.com/msp
+    AnchorPeers:
+      - Host: blockchain-insuranceflorence
+      - Port: 30510
+      - Host: blockchain-insuranceparis
+      - Port: 30610
+
+  - &OwnerOrg
+    Name: OwnerOrgMSP
+    ID: OwnerOrgMSP
+    MSPDir: crypto-config/peerOrganizations/owner.caldera.com/msp
+    AnchorPeers:
+      - Host: blockchain-ownerflorence
+      - Port: 30710
+      - Host: blockchain-ownerparis
+      - Port: 30810
+
+  - &ProvenanceOrg
+    Name: ProvenanceOrgMSP
+    ID: ProvenanceOrgMSP
+    MSPDir: crypto-config/peerOrganizations/provenance.caldera.com/msp
+    AnchorPeers:
+      - Host: blockchain-provenanceflorence
+      - Port: 30910
+      - Host: blockchain-provenanceparis
+      - Port: 31010
+
+  - &ResearchOrg
+    Name: ResearchOrgMSP
+    ID: ResearchOrgMSP
+    MSPDir: crypto-config/peerOrganizations/research.caldera.com/msp
+    AnchorPeers:
+      - Host: blockchain-researchflorence
+      - Port: 31110
+      - Host: blockchain-researchparis
+      - Port: 31210
+
+Application: &ApplicationDefaults
+
+Orderer: &OrdererDefaults
+
+  OrdererType: kafka
+
+  Addresses:
+    - blockchain-ordererflorence:31310
+    - blockchain-ordererparis:31410
+
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+  Kafka:
+    Brokers:
+      - kafka0.caldera.com:9092
+      - kafka1.caldera.com:9092
+      - kafka2.caldera.com:9092
+      - kafka3.caldera.com:9092
+  Organizations:
+
+Profiles:
+  CalderaOrdererGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+    Consortiums:
+      CalderaConsortium:
+        Organizations:
+          - *ArtistOrg
+          - *BrokerOrg
+          - *InsuranceOrg
+          - *OwnerOrg
+          - *ProvenanceOrg
+          - *ResearchOrg
+
+  CalderaChannel:
+    Consortium: CalderaConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+          - *ArtistOrg
+          - *BrokerOrg
+          - *InsuranceOrg
+          - *OwnerOrg
+          - *ProvenanceOrg
+          - *ResearchOrg
+
