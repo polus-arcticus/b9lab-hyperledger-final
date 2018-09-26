@@ -1,0 +1,82 @@
+# Configtx.yaml specifies a configuration for the configtxgen binary, which outputs
+# artifacts required to initialize a blockchain
+
+# Organizations are loaded with cryptographic material from cryptogen
+Organizations:
+  # Name of the Organization responsible for operation the ordering service
+  - &OrdererOrg
+    Name: OrdererOrg
+    ID: OrdererMSP
+    # a Path to the crypto
+    MSPDir: ../containers/cli/peers/ordererOrganizations/orderer-org/msp
+
+  - &ArtistOrg
+    Name: ArtistOrgMSP
+    ID: ArtistOrgMSP
+    MSPDir: ../containers/cli/peers/peerOrganizations/artist-org/msp
+    # Configtxgen generates anchor objects which faciliate fabrics gossip protocol
+    AnchorPeers:
+      # network url:port mappings link organizations to its peers
+      - Host: artist-peer-florence
+      - Port: 7051
+      - Host: artist-peer-paris
+      - Port: 7051
+
+  - &BrokerOrg
+    Name: BrokerOrgMSP
+    ID: BrokerOrgMSP
+    MSPDir: ../containers/cli/peers/peerOrganizations/broker-org/msp
+    AnchorPeers:
+      - Host: broker-peer-florence
+      - Port: 7051
+      - Host: broker-peer-paris
+      - Port: 7051
+
+# Section dedicated to defining the details of each organizations`
+
+# defines our orderers and consensus type
+Orderer: &OrdererDefaults
+  OrdererType: solo
+
+  Addresses:
+    - orderer0:7050
+
+  # block preferences
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+
+  Organizations:
+
+Application: &ApplicationDefaults
+  Organizations:
+# Profiles specifies genesis block creation, consortium config and channel config
+Profiles:
+  # Defines a genesis block for our orderer organization with a solo orderer type
+  CalderaOrdererGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+      OrdererType: solo
+      Organizations:
+        - *OrdererOrg
+
+    # Defines the participating organizations and wraps them in a consortium
+    Consortiums:
+      CalderaConsortium:
+        Organizations:
+          - *ArtistOrg
+          - *BrokerOrg
+
+  # Defines the main caldera channel
+  CalderaChannel:
+    Consortium: CalderaConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+          - *ArtistOrg
+          - *BrokerOrg
+
+
+
