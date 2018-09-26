@@ -1,0 +1,78 @@
+Orderer: &OrdererDefaults
+  OrdererType: kafka
+
+  Addresses:
+    - orderer0:7050
+
+  # block preferences
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 99 MB
+    PreferredMaxBytes: 512 KB
+
+  # address our kafka brokers
+  Kafka:
+    Brokers:
+      - kafka0:9092
+      - kafka1:9092
+      - kafka2:9092
+      - kafka3:9092
+
+  Organizations:
+
+Application: &ApplicationDefaults
+  Organizations:
+# Yaml file that is consumedby the configtxgen binary
+# Profiles specifies network topology
+Organizations:
+  - &OrdererOrg
+    Name: OrdererOrg
+    ID: OrdererMSP
+    MSPDir: ./crypto-config/ordererOrganizations/orderer-org/msp
+
+  - &ArtistOrg
+    Name: ArtistOrgMSP
+    ID: ArtistOrgMSP
+    MSPDir: ./crypto-config/peerOrganizations/artist-org/msp
+    AnchorPeers:
+      - Host: artist-peer-florence
+      - Port: 7051
+      - Host: artist-peer-paris
+      - Port: 7051
+
+  - &BrokerOrg
+    Name: BrokerOrgMSP
+    ID: BrokerOrgMSP
+    MSPDir: ./crypto-config/peerOrganizations/broker-org/msp
+    AnchorPeers:
+      - Host: broker-peer-florence
+      - Port: 7051
+      - Host: broker-peer-paris
+      - Port: 7051
+
+
+Profiles:
+  # Define a kafka orderer configuration
+  CalderaOrdererGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+      OrdererType: kafka
+      Organizations:
+        - *OrdererOrg
+
+    # Defines the participating organizations and wraps them in a consortium
+    Consortiums:
+      CalderaConsortium:
+        Organizations:
+          - *ArtistOrg
+          - *BrokerOrg
+
+  # Defines the main caldera channel
+  CalderaChannel:
+    Consortium: CalderaConsortium
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+          - *ArtistOrg
+          - *BrokerOrg
