@@ -32,6 +32,15 @@ async function queryInventory(object) {
   }
 }
 
+async function sellArt(parameters) {
+  try {
+    const response = await ownerClient0.invoke(config.chaincodeId, config.chaincodeVersion, 'sell_art', parameters)
+    return response
+  } catch (e) {
+    throw e
+  }
+}
+
 module.exports = () => {
 
   router.post(`/organizations/owners/peers/:peerid/`, async (req, res) => {
@@ -55,10 +64,25 @@ module.exports = () => {
     }
     try {
       let response = await queryInventory(object)
-      res.json(object)
+      res.json(response)
     } catch (e) {
       console.log(e)
       res.json("couldnt access blockchain")
+    }
+  });
+
+  router.post(`/organizations/brokers/peers/:peerid/users/:brokerid/inventory/:inventoryid/sell`, async (req, res) => {
+    const parameters = {
+      owner: req.body.owner,
+      inventory: req.params.inventoryid
+    }
+
+    try {
+      const response = await sellArt(parameters)
+      res.json(response)
+    } catch (e) {
+      console.log(e)
+      res.json("error selling art")
     }
   })
   return router
