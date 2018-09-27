@@ -3,6 +3,7 @@
 # Here we define our networks initial organizations.
 # Organizations are the backbone of delegating network permissions
 
+# # These root certificates will be stored in the creator vault to be used to create core peers
 # OrdererOrgs contains specification for Orderer Organizations
 # These organizations permission operation of the orderer nodes
 OrdererOrgs:
@@ -19,9 +20,13 @@ PeerOrgs:
     Domain: artist-org
     # multiple hostnames under one org configures multiple peers to one org
     Specs:
-      - Hostname: artist-peer-florence
-      - Hostname: artist-peer-paris
+      # Let's get a head start and define our address mapping for our peers to be authorized by those approved by the vault creator
 
+      - Hostname: artist-peer-florence
+      #  yes, indeed, even further ahead it appears a network agreement has been reached to subdivide user permissioning, and chaincode validation and blockchain extension
+      - Hostname: artist-peer-paris
+# In the guarantee that these root msp credentials can be permissioned correctly to required parties that our fabric network has authenticity
+# We, the trusty vault owners will live by a strict code of non-interfence on inter-organizational affairs
   - Name: BrokerOrg
     Domain: broker-org
     Specs:

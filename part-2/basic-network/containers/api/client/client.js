@@ -1,6 +1,11 @@
+/*this is 1.2 right now*/
+/*
+Client is invoked for each org
+more detials in clientBuilder*/
 import hfc from 'fabric-client';
 import utils from 'fabric-client/lib/utils';
 import CAClient from 'fabric-ca-client';
+/* A Shout our Ishan-Gulane, reading his blockchain insurance app is the inspiration of this work*/
 import User from 'fabric-client/lib/User';
 import http from 'http';
 import { resolve } from 'path';
@@ -8,6 +13,11 @@ import url from 'url';
 import Long from 'long';
 import { snakeToCamelCase } from 'json-style-converter';
 
+
+/*
+Helper Functions
+*/
+/*Dynamic type javascript objects may fool protobuffer network to chaincode sandboxS */
 function marshalArgs(args) {
   if (!args) {
     return args
@@ -26,6 +36,7 @@ function marshalArgs(args) {
     return [JSON.stringify(args)];
   }
 }
+
 
 function unmarshalResult(result) {
   console.log("result", result)
@@ -89,6 +100,9 @@ async function getSubmitter(
   }
 }
 
+/* CLASS CLIENT IBM/build-clockchain-insurance-app
+   Consumes ../config.js for network paths and tls certs
+*/
 export default class CalderaClient {
   constructor(channelName, ordererConfig, peerConfig, caConfig, admin) {
     this._channelName = channelName;
@@ -117,6 +131,10 @@ export default class CalderaClient {
     this._adminUser = null;
   }
 
+/*
+Provisions our client an admin context
+This requires a certifiacte from the root MSP USER Admin certiicate and keys
+*/
   async login() {
     try {
       this._client.setStateStore(
@@ -131,6 +149,8 @@ export default class CalderaClient {
     }
   }
 
+/*
+apply the client user object with admin credentials*/
   async getOrgAdmin() {
     return this._client.createUser({
       username: `Admin@${this._peerConfig.hostname}`,
@@ -142,6 +162,8 @@ export default class CalderaClient {
     })
   }
 
+/*
+expose our chaincode sandbox to our chaincodes initial state*/
   async initialize() {
     try {
       await this._channel.initialize();
@@ -150,7 +172,8 @@ export default class CalderaClient {
       throw e
     }
   }
-
+/*
+*/
   async checkChannelMembership() {
     try {
       console.log('this_peers[0]', this._peers[0])
