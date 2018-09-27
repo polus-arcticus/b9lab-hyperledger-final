@@ -18,6 +18,8 @@ function dockerCompose {
   echo '#### spinning up our network will also spin up our api which contains client instances for each peer'
   echo '#### now would be a good time to inspect ./containers/api/client/client.js and clientbuilder.js'
   echo '#### would you like to spin up the blockchain network?: '
+  echo '#### !!!! THIS NETWORK WAS BUILT ON 1.2 PEER nodes !!! ####'
+
   inspect
   docker-compose -f basic-network/docker-compose.yaml up -d
   echo '#### feel free to run'
@@ -25,6 +27,7 @@ function dockerCompose {
   echo '#### for details on the sdk handling the various steps involved in running a network'
   echo '#### now is a good time to look inside ./basic-network/containers/api/client'
   inspect
+  echo '#### !!!! WARNING OUR WORKFLOW IS INCOMPLETE! WAIT FOR PART 3 !!!! ####'
   echo '#### feel free to go into your browser and go to localhost:3000'
   echo '#### these api routes model a basic asset exchange workflow'
   echo '#### these api routes will trigger logs in the api'

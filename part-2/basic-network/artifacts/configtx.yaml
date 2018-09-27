@@ -37,7 +37,7 @@ Organizations:
 # defines our orderers and consensus type
 Orderer: &OrdererDefaults
   OrdererType: solo
-
+  # address of the orderering service
   Addresses:
     - orderer0:7050
 
@@ -64,6 +64,7 @@ Profiles:
 
     # Defines the participating organizations and wraps them in a consortium
     Consortiums:
+      # A handy way of attaching MSP privilages to peers permissioned with these org
       CalderaConsortium:
         Organizations:
           - *ArtistOrg

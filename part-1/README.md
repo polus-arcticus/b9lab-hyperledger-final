@@ -22,27 +22,46 @@ A disadvantage of permission blockchained over current solutions are undoubtedly
 
   - for our proof of concept we will initially create 3 organizations
   - - Orderer-Org
-  - - - Transaction orderering will be important in this market, so we must delegate these key and certs to an unbiased source such as a conglomerate or consortium of interested actors
+  - -  Controls Access to orderering service operations
+  - - - Orderer certificates provide they keys to orderer transactions and accept updated blocks from peers
+  - - - This authority rises in importance as decentralized orderers become demanded amonst interested parties
+  - - - Let this orderer be hosted by a creater hosted vault of orderer keys and certs
 
   - - Artist-Org
-  - - - An organization level belonging to an artist will be useful in registering new works onto our blockchain with authority.
+  - - - An Organizational Level designed to authenticate Admin approved artists
+  - - - - These Admins are Initially aproved by a creater vault Artist-Org/msp
+  - - - Network demand is bounded by willingness to supply the network with Artist-Org peer nodes generated Admin certs
+
+
 
   - - Broker-Org
+  - - Broker-Org Controls access to api services that involve taking on inventory and selling a broker request
   - - - An organization for the artists brokerage will help move art registered by an artist into a brokerage clearly
-  - - - the brokerage organization will have an audit trail of works, reduing the need for reputation
+  - - - the brokerage organization will be bounded by demanded for private stores alongside a web of marketed art
+  - - -  will have a multi party audit trail of works, reducing the need for reputation investment elsewere
 
   - - Owner-Org
+  - - While a Broker may simply promise to blockcert their artist approved brokerage into their desired public chain
+  - - A Subset of individuals have no use for art creation, but its require services for secondary market brokeraging, or prior work registration
+  - - Owner Peers would be bounded by the demand for a more complete and dynamic secondary workflows.
   - - - Holders of art that are not artists will need their own keys to the blockchain to continue this workflow as they themselves buy and sell art through the brokerage
+  - - This project will append our Owner-org in part-3 ```./bootstrap-extension.sh```
+
 
   - Our chaincode will encompass the following workflow
-  - - Register Artist
+  - - Register Artist user
+  - - - This would be a creator of art under an organization
+  - - - - creates contract with brokerage that enables such brokerage to place on the shelf if you will.
   - - Have him register a work of art on caldera
+  - - - Such data structure is of interest but not a topic of this tour
   - - Register broker
+  - - - A brokerage peer under the authority Admin has a worker
+  - - - - this worker is the broker user
   - - have the artist request the broker to broker art
   - - have the brokerage approve the request
   - - register owner
   - - owner buys art from brokerage
 
+  - A generic query can be made to a piece of arts Transaction and Block history as it mutates from state to state
   - - each organization will have a certificate authority and and two peers
 
-  - - our operation will exist on a single channel, noting the potential use of private data stores to enchance a brokerages privacy down the line.

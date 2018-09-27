@@ -38,19 +38,5 @@
     <form enctype="application/json" action="/api/organizations/brokers/peers/florence/users/gala-florence/requests/request-0/approve" method="POST">
       <button type="submit" name="Approve">Approve</button>
     </form>
-    <h2>3. Owner registers</h2>
-    <form enctype="application/json" action="/api/organizations/owners/peers/florence" method="POST">
-      <input type="text" name="name" value="Cornelius">
-      <input type="text" name="username" value="cornelius">
-      <input type="text" name="password" value="password">
-      <button type="submit" name="Register">Register</button>
-    </form>
-    <h2>3a. Owner queries broker inventory</h2>
-    <p> /api/organizations/brokers/peers/florence/users/gala-florence/inventory</p>
-    <h2>3b. Owner can buy a piece of inventory</h2>
-      <form enctype="application/json" action="/api/organizations/brokers/peers/florence/users/gala-florence/inventory/inventory-0/sell" method="POST">
-      <input type="text" name="owner" value="cornelius">
-      <button type="submit" name="Register">Purchase</button>
-    </form>
   </body>
 </html>
