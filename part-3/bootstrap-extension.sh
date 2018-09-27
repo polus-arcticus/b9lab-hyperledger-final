@@ -18,7 +18,7 @@ function org3DockerCompose {
   echo '#### lets run docker-compose to attach these containers to our network'
   docker-compose -f $ORG3PATH/docker-compose.yaml up -d
   docker cp $ORG3PATH/../scripts org3cli:/
-  echo '#### network is now running'
+
   echo '#### lets now bash into our Org3cli to join the channel update our chaincode'
   echo '#### docker exec -it org3cli bash'
   echo '#### have your ran this cmd?'
@@ -143,6 +143,15 @@ function dockerCompose {
   echo '#### feel free to look inside'
   echo '#### ./basic-network-extension/containers/api/chaincode/src/caldera/main.go'
   echo '#### to explore the chaincode'
+  inspect
+  echo '#### network is now running'
+  echo '#### lets give us a second for our api container to install and instantiate our chaincode'
+  echo '#### please go to localhost:3000 in a browser'
+  echo '#### please click on the first 6 api routes'
+  echo '#### this will create an artist and register the artwork'
+  echo '#### and create a broker and register that art with it'
+  echo '#### we do this now so that we do not have to switch the chaincode version once we upgrade'
+  inspect
   echo '#### Basic-network bootstrap complete'
   echo '#### One will notice that registering our owner to complete our chaincode workflow fails'
   echo '#### Lets extend our network to add the owner peer and complete our chaincode asset exchange workflow'

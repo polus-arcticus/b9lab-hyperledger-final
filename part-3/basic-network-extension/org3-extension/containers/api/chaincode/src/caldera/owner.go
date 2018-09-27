@@ -32,6 +32,9 @@ func createOwner(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 		}
 
 		err = stub.PutState(ownerKey, ownerAsBytes)
+		if err != nil {
+			return shim.Error(err.Error())
+		}
 		responseAsBytes, err := json.Marshal(Response{"Registered!"})
 		if err != nil {
 			return shim.Error(err.Error())
