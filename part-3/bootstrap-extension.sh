@@ -29,6 +29,7 @@ function org3DockerCompose {
   inspect
   echo '#### great now we can quickly update the chaincode on all our peers'
   echo '#### in the b9cli cd scripts and run'
+  echo '#### !!!! run this in the top level cli b9cli !!! #### may need chmod '
   echo '#### ./updateCC.sh'
   inspect
   echo 'great We are now ready to boot our api for this new org and complete our chaincode workflow'
@@ -142,7 +143,7 @@ function dockerCompose {
   echo '#### these api routes will trigger logs in the api'
   echo '#### feel free to look inside'
   echo '#### ./basic-network-extension/containers/api/chaincode/src/caldera/main.go'
-  echo '#### to explore the chaincode'
+  echo '#### !!!! Please give time for the api log to say caldera chaincode installed before querying our blockchain on localhost:3000 !!!! ####'
   inspect
   echo '#### network is now running'
   echo '#### lets give us a second for our api container to install and instantiate our chaincode'

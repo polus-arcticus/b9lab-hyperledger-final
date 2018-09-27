@@ -1,4 +1,4 @@
-import chai from 'chai'
+simport chai from 'chai'
 import path from 'path'
 import CalderaClient from '../client/client'
 import config from '../config'
