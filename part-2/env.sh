@@ -3,7 +3,7 @@
 # Script to manage env for bootstrap
 
 ## adding the location to cryptogen and configtxgen in the paths env
-PATH=$GOPATH/src/github.com/hyperledger/fabric-samples/bin:$PATH
+PATH=$HOME/fabric-samples/bin:$PATH
 MAINPATH=$(pwd)
 CLIPATH=$MAINPATH/basic-network/containers/cli/peers
 ORDERERS=$CLIPATH/ordererOrganizations
@@ -47,6 +47,8 @@ function buildDocker {
   docker build -t artist-peer-florence:latest $CONTAINERS/artist/artistPeerFlorence/
   docker build -t artist-peer-paris:latest $CONTAINERS/artist/artistPeerParis/
   docker build -t b9cli:latest $CONTAINERS/cli
+  docker build -t artist-ca:latest $CONTAINERS/artist/artistCA
+  docker build -t broker-ca:latest $CONTAINERS/broker/brokerCA
   docker build -t broker-peer-florence:latest $CONTAINERS/broker/brokerPeerFlorence/
   docker build -t broker-peer-paris:latest $CONTAINERS/broker/brokerPeerParis/
   docker build -t api:latest $CONTAINERS/api
