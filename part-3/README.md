@@ -13,11 +13,14 @@ this will automate our part-2 process to after it is spun up
 happy tour :)
 
 Extending our network with Kafka
+
+
 ``` cd basic-network-kafka ```
+./start.sh needs the path variable on line 3 to lead to the fabric binaries
 ```sudo chmod 777 -R ./artifacts```
 ``` ./start.sh ```
 
-got to local host to invoke chaincode
+go to local host to invoke chaincode
 
 
 
