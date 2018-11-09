@@ -1,6 +1,6 @@
 import express from 'express';
 
-const ownerClient0 = require('../client/clientBuilder').ownerClient0;
+const ownerClient0 = require('../client/clientBuilder').org3Client;
 
 const router = express.Router()
 
