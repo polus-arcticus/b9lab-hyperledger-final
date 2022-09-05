@@ -11,13 +11,13 @@
 #
 
 # Name of the docker-compose network
-NETWORK=caldera
+NETWORK=credwallet
 
 # Names of the orderer organizations
 ORDERER_ORGS="orderer-org"
 
 # Names of the peer organizations
-PEER_ORGS="artist-org broker-org"
+PEER_ORGS="user-org creditor-org employer-org"
 
 # Number of peers in each peer organization
 NUM_PEERS=2
@@ -45,7 +45,7 @@ GENESIS_BLOCK_FILE=/$DATA/genesis.block
 CHANNEL_TX_FILE=/$DATA/channel.tx
 
 # Name of test channel
-CHANNEL_NAME=caldera
+CHANNEL_NAME=credwallet
 
 # Query timeout in seconds
 QUERY_TIMEOUT=15
